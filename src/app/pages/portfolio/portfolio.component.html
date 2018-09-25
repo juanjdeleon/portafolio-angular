@@ -24,7 +24,7 @@
   </div>
 
   <div class="ae-masonry ae-masonry-md-2 ae-masonry-xl-4" *ngIf="!productosService.cargando">
-    <a *ngFor="let item of productosService.productos" href="portfolio-item.html" class="rk-item ae-masonry__item">
+    <a *ngFor="let item of productosService.productos" [routerLink]="['/item', item.cod]" class="rk-item ae-masonry__item">
       <img src="assets/img/productos/{{ item.url }}.jpg" alt="">
       <div class="item-meta">
         <h2>{{ item.categoria }}</h2>
