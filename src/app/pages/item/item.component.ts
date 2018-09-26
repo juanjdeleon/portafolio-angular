@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ProductosServiceService } from '../../services/productos-service.service';
+import { ProductoDetalleInterface } from '../../interfaces/producto-detalle-interface';
 
 @Component({
   selector: 'app-item',
@@ -8,12 +10,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ItemComponent implements OnInit {
 
-  constructor(private router: ActivatedRoute) { }
+  producto: ProductoDetalleInterface;
+  id: string;
+
+  constructor(private router: ActivatedRoute,
+              public productoService: ProductosServiceService) { }
 
   ngOnInit() {
 
     this.router.params.subscribe(params => {
-      console.log(params);
+      this.productoService.getProducto(params['id']).subscribe((producto: ProductoDetalleInterface) => {
+        this.id = params['id'];
+        this.producto = producto;
+      });
     });
 
   }
